@@ -15,10 +15,10 @@ Jobs:
 
     
 steps: 
-   -name : checkout the code 
+   -name: checkout the code 
     uses: actions/checkout@v6.0.0
 
-    -name : install nodejs and npm
+    -name: install nodejs and npm
      uses: actions/setup-node@v6.0.0
       with: 
      node-version: '22'
