@@ -1,40 +1,31 @@
-name : postman collection workflow
-on  :
+name : Postman Collection Workflow
+on:
   push:
     branches: [main]
-    
-workflow_dispatch:
-    schedule :
-      -cron : 30 02 * * *   # 8 am IST
-      -cron : 00 14 * * *    #730 pm IST
-      -cron : 00 06 * * 1-5   # 1130 pm IST
-      
-Jobs: 
-  Run-Postman-Test:
-    runs_on: ubentu-latest
+  workflow_dispatch:
+  schedule:
+    - cron : 30 02 * * * # 8:00 AM IST
+    - cron : 00 14 * * * # 7:30 PM IST
+    - cron : 00 06 * * 1-5 # 11:30 AM IST
 
-    
-steps: 
+jobs:
+  run-postman-tests:
+    runs-on: ec2-github-runner
 
-   -name: checkout the code
-   uses: actions/checkout@v6.0.0
-   
-   -name: install Nodejs and npm
-   uses: actions/setup-node@v6.0.0
-   with: 
-     node-version: '22'
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v6-beta
 
-     -name: Install Newman and html extra globally 
-     run: |
-        npm install -g newman
-        npm install -g newman-reporter-htmlextra
+      - name: Install Nodejs and npm
+        uses: actions/setup-node@v6.0.0
+        with: 
+            node-version: '22'
 
-     -name: Run postman collection with Newman
-     run: |
-       newman run 'Inwarranty-flow Collection.postman_collection.json'\
-       -e QA.postman_environment.json\
-       -d testData.csv\
-       -r cli,htmlextra
+      - name: Install Newman and html-extra glabally
+        run: |
+              npm install -g newman 
+              npm install -g newman-reporter-htmlextra
+
      
 
     
