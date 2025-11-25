@@ -21,7 +21,7 @@ steps:
    
    -name: install Nodejs and npm
    uses: actions/setup-node@v6.0.0
-    with: 
+     with: 
      node-version: '22'
 
      -name: Install Newman and html extra globally 
