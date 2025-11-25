@@ -24,8 +24,8 @@ steps:
 
      -name: Install Newman and html extra globally 
      run: |
-    npm install -g newman
-    npm install -g newman-reporter-htmlextra
+        npm install -g newman
+        npm install -g newman-reporter-htmlextra
 
      -name: Run postman collection with Newman
      run: |
