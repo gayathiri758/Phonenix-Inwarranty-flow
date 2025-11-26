@@ -30,9 +30,10 @@ jobs:
         run: |
           newman run 'Inwarranty-flow Collection.postman_collection.json' \
           -e QA.postman_environment.json \
+             testData.csv \
           -r cli,htmlextra \
-             testData.csv
-
+          --reporter-htmlextra-export ./newman/index.html
+          
       - name: Newman Report
         if: always()
         uses: actions/upload-artifact@v5.0.0
